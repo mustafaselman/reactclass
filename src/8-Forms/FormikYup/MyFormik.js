@@ -1,5 +1,6 @@
 import React from 'react'
 import {useFormik} from "formik"
+import validations from "./validation"
 
 const MyFormik = () => {
 
@@ -16,27 +17,30 @@ const MyFormik = () => {
         onSubmit: (values,bag) => {
             console.log(values)
             bag.resetForm();
-        }
+        },
+        validationSchema:validations,
     })
 
   return (
     <form onSubmit={handleSubmit}>
         <input
             type='text'
-            name='name'
+            name="name"
             placeholder='name'
             onChange={handleChange}
             onBlur={handleBlur}
         />
         <br/>
+        {errors.name && touched.name && <div>{errors.name}</div>}
         <input
-            type='text'
-            name='email'
-            placeholder='email'
+            type="text"
+            name="email"
+            placeholder="email"
             onChange={handleChange}
             onBlur={handleBlur}
         />
         <br/>
+        {errors.email && touched.email && <div>{errors.email}</div>}
         <label>Male</label>
         <input type="radio" name='gender' value="male" onChange={handleChange}/>
         <label>Female</label>
@@ -60,10 +64,12 @@ const MyFormik = () => {
         <br/>
         <input name='password' onChange={handleChange} onBlur={handleBlur}/>
         <br/>
+        {errors.password && touched.password && <div>{errors.password}</div>}
         <label>Confirm Password</label>
         <br/>
         <input name='confirmPassword' onChange={handleChange} onBlur={handleBlur}/>
         <br/>
+        {errors.confirmPassword && touched.confirmPassword && <div>{errors.confirmPassword}</div>}
         <br/>
         <button type="submit">Kayıt ol</button>
     </form>
